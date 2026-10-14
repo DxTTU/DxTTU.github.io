@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhatrinath Lade — Full-Stack Developer</title>
+<meta name="description" content="Portfolio of Dhatrinath Lade, B.Tech CSE (Cloud Engineering) — full-stack developer building AI-powered tools and cloud-native apps.">
+<style>
+:root {
+  --bg: #0b0f1a;
+  --bg-soft: #101728;
+  --card: #131c31;
+  --text: #e8edf7;
+  --muted: #9aa7c2;
+  --accent: #6366f1;
+  --accent2: #22d3ee;
+  --border: #223052;
+  --radius: 14px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+a { color: inherit; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- nav ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(11, 15, 26, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1080px; margin: 0 auto; padding: 14px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px;
+}
+.brand { font-weight: 800; font-size: 1.15rem; letter-spacing: 0.5px; text-decoration: none; }
+.brand span { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+.nav-links a {
+  text-decoration: none; color: var(--muted); font-size: 0.92rem; font-weight: 600;
+  padding: 8px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s;
+}
+.nav-links a:hover { color: var(--text); background: var(--bg-soft); }
+
+/* ---------- hero ---------- */
+.hero { padding: 110px 0 90px; text-align: center; position: relative; overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; inset: -40%;
+  background: radial-gradient(ellipse 45% 40% at 50% 30%, rgba(99, 102, 241, 0.22), transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-block; font-size: 0.82rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--accent2);
+  border: 1px solid var(--border); border-radius: 999px; padding: 7px 18px; margin-bottom: 26px;
+  background: rgba(34, 211, 238, 0.06);
+}
+.hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 800; line-height: 1.12; letter-spacing: -1px; }
+.hero h1 .grad { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero-sub { color: var(--muted); font-size: 1.15rem; max-width: 640px; margin: 22px auto 0; }
+.hero-cta { margin-top: 36px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-block; text-decoration: none; font-weight: 700; font-size: 0.98rem;
+  padding: 13px 30px; border-radius: 10px; transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.btn-primary { background: linear-gradient(90deg, var(--accent), var(--accent2)); color: #fff; box-shadow: 0 8px 28px rgba(99, 102, 241, 0.35); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(99, 102, 241, 0.5); }
+.btn-ghost { border: 1px solid var(--border); color: var(--text); background: var(--bg-soft); }
+.btn-ghost:hover { transform: translateY(-2px); border-color: var(--accent); }
+.hero-meta { margin-top: 30px; color: var(--muted); font-size: 0.92rem; }
+
+/* ---------- sections ---------- */
+.section { padding: 84px 0; }
+.section.alt { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.kicker { color: var(--accent2); font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+.h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 800; letter-spacing: -0.5px; margin-bottom: 18px; }
+.lead { color: var(--muted); max-width: 680px; font-size: 1.05rem; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 36px; }
+
+/* ---------- about ---------- */
+.about-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 30px; transition: transform 0.25s, border-color 0.25s;
+}
+.about-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.about-card h3 { font-size: 1.05rem; margin-bottom: 10px; color: var(--accent2); }
+.about-card p { color: var(--muted); font-size: 0.97rem; }
+.facts { list-style: none; margin-top: 8px; }
+.facts li { padding: 9px 0; border-bottom: 1px solid var(--border); color: var(--muted); font-size: 0.95rem; }
+.facts li:last-child { border-bottom: none; }
+.facts strong { color: var(--text); font-weight: 700; }
+
+/* ---------- skills ---------- */
+.skill-group { margin-top: 34px; }
+.skill-group h3 { font-size: 1.02rem; margin-bottom: 14px; color: var(--text); }
+.pills { display: flex; flex-wrap: wrap; gap: 10px; }
+.pill {
+  background: var(--card); border: 1px solid var(--border); border-radius: 999px;
+  padding: 9px 18px; font-size: 0.9rem; font-weight: 600; color: var(--text);
+  transition: border-color 0.2s, transform 0.2s;
+}
+.pill:hover { border-color: var(--accent2); transform: translateY(-2px); }
+
+/* ---------- projects ---------- */
+.proj-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; margin-top: 38px; }
+.proj {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 30px; display: flex; flex-direction: column;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  animation: fadeUp 0.7s ease both;
+}
+.proj:hover { transform: translateY(-6px); border-color: var(--accent); box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35); }
+.proj-tag { font-size: 0.75rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent2); margin-bottom: 12px; }
+.proj h3 { font-size: 1.35rem; margin-bottom: 10px; }
+.proj p { color: var(--muted); font-size: 0.95rem; flex: 1; }
+.proj-stack { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+.proj-stack span { font-size: 0.78rem; font-weight: 700; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; color: var(--muted); }
+.proj-links { display: flex; gap: 14px; }
+.proj-links a { color: var(--accent2); font-weight: 700; font-size: 0.92rem; text-decoration: none; }
+.proj-links a:hover { text-decoration: underline; }
+
+/* ---------- resume ---------- */
+.timeline { margin-top: 36px; border-left: 2px solid var(--border); padding-left: 28px; }
+.t-item { position: relative; padding-bottom: 30px; }
+.t-item::before {
+  content: ""; position: absolute; left: -36px; top: 6px; width: 14px; height: 14px;
+  border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+.t-item h3 { font-size: 1.1rem; }
+.t-item .t-where { color: var(--accent2); font-weight: 600; font-size: 0.92rem; }
+.t-item .t-when { color: var(--muted); font-size: 0.85rem; margin-bottom: 8px; }
+.t-item p { color: var(--muted); font-size: 0.95rem; }
+.cert-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+
+/* ---------- contact ---------- */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 36px; }
+.form-card, .social-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px; }
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 0.88rem; font-weight: 700; margin-bottom: 7px; color: var(--muted); }
+.field input, .field textarea {
+  width: 100%; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 9px;
+  color: var(--text); padding: 12px 14px; font-size: 0.95rem; font-family: inherit;
+  transition: border-color 0.2s;
+}
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); }
+.field textarea { min-height: 120px; resize: vertical; }
+.social-links { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+.social-links a {
+  display: flex; align-items: center; gap: 12px; text-decoration: none;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px;
+  padding: 13px 18px; font-weight: 600; font-size: 0.95rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.social-links a:hover { border-color: var(--accent2); transform: translateX(4px); }
+.social-links .s-icon { font-size: 1.25rem; }
+
+/* ---------- footer ---------- */
+.footer { border-top: 1px solid var(--border); padding: 34px 0; text-align: center; color: var(--muted); font-size: 0.9rem; }
+
+/* ---------- animations ---------- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { animation: fadeUp 0.8s ease both; }
+.reveal-1 { animation-delay: 0.08s; }
+.reveal-2 { animation-delay: 0.16s; }
+.reveal-3 { animation-delay: 0.24s; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .grid-2, .proj-grid, .contact-grid { grid-template-columns: 1fr; }
+  .hero { padding: 80px 0 64px; }
+  .section { padding: 64px 0; }
+}
+@media (max-width: 600px) {
+  .nav-inner { justify-content: center; text-align: center; }
+  .nav-links { justify-content: center; }
+  .hero-cta .btn { width: 100%; text-align: center; }
+  .timeline { padding-left: 22px; }
+  .t-item::before { left: -30px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#home">D<span>.</span>Lade</a>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-badge reveal">Open to opportunities · 2027</div>
+    <h1 class="reveal reveal-1">Hi, I'm <span class="grad">Dhatrinath Lade</span></h1>
+    <p class="hero-sub reveal reveal-2">Full-stack developer crafting AI-powered tools and cloud-native apps. B.Tech CSE (Cloud Engineering) at KL University, graduating 2027.</p>
+    <div class="hero-cta reveal reveal-3">
+      <a class="btn btn-primary" href="#projects">View My Work</a>
+      <a class="btn btn-ghost" href="#contact">Get In Touch</a>
+    </div>
+    <p class="hero-meta">Vijayawada, India · Available for internships &amp; entry-level roles</p>
+  </div>
+</header>
+
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="kicker">About Me</div>
+    <h2 class="h2">Developer by craft, builder by habit</h2>
+    <p class="lead">I'm a final-year computer science student who learns by shipping. From load-balancer simulators to AI resume checkers, I turn ideas into working software — then make sure it runs reliably in the cloud.</p>
+    <div class="grid-2">
+      <div class="about-card">
+        <h3>What I do</h3>
+        <p>I build full-stack web apps (React + Node/Spring Boot), design cloud-native deployments (Docker, CI/CD, GCP/AWS), and experiment with AI-powered developer tools. My flagship project, LoadSense AI, simulates real load balancers and predicts traffic spikes with machine learning.</p>
+      </div>
+      <div class="about-card">
+        <h3>Quick facts</h3>
+        <ul class="facts">
+          <li><strong>Education:</strong> B.Tech CSE (Cloud Engineering), KL University — 2027</li>
+          <li><strong>Focus:</strong> Full-stack development, Cloud &amp; DevOps</li>
+          <li><strong>Certifications:</strong> AWS · Automation Anywhere</li>
+          <li><strong>Languages:</strong> English, Telugu, Hindi</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="skills">
+  <div class="wrap">
+    <div class="kicker">Skills</div>
+    <h2 class="h2">My toolbox</h2>
+    <p class="lead">Technologies I use to design, build, and ship software.</p>
+    <div class="skill-group">
+      <h3>Languages</h3>
+      <div class="pills">
+        <span class="pill">Java</span><span class="pill">Python</span><span class="pill">JavaScript</span><span class="pill">TypeScript</span><span class="pill">SQL</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Frontend</h3>
+      <div class="pills">
+        <span class="pill">React.js</span><span class="pill">Vite</span><span class="pill">HTML5</span><span class="pill">CSS3</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Backend</h3>
+      <div class="pills">
+        <span class="pill">Node.js</span><span class="pill">Express.js</span><span class="pill">Spring Boot</span><span class="pill">MongoDB</span><span class="pill">PostgreSQL</span><span class="pill">Socket.IO</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>Cloud &amp; DevOps</h3>
+      <div class="pills">
+        <span class="pill">AWS</span><span class="pill">GCP</span><span class="pill">Docker</span><span class="pill">Kubernetes</span><span class="pill">CI/CD</span><span class="pill">Terraform</span><span class="pill">GitHub Actions</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <h3>CS Fundamentals</h3>
+      <div class="pills">
+        <span class="pill">DSA</span><span class="pill">OOP</span><span class="pill">System Design Basics</span><span class="pill">LLM Integration</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="kicker">Projects</div>
+    <h2 class="h2">Things I've built</h2>
+    <p class="lead">A selection of projects — each one taught me something new about building and shipping software.</p>
+    <div class="proj-grid">
+      <article class="proj">
+        <div class="proj-tag">Flagship</div>
+        <h3>LoadSense AI</h3>
+        <p>Real-time load-balancer comparison simulator (HAProxy, NGINX, AWS ELB, F5, GCP, Azure, Cloudflare, Traefik) with a predictive ML model for traffic spikes, streaming live over WebSockets — plus an embedded chatbot.</p>
+        <div class="proj-stack"><span>React</span><span>Node.js</span><span>Socket.IO</span><span>MongoDB</span><span>Python ML</span></div>
+        <div class="proj-links"><a href="https://github.com/DxTTU" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
+      <article class="proj">
+        <div class="proj-tag">Full-Stack</div>
+        <h3>AcxiomCRM</h3>
+        <p>Complete CRM platform with role-based dashboards (admin, manager, sales), lead pipelines, and analytics. 58/58 backend tests passing, clean modular architecture.</p>
+        <div class="proj-stack"><span>React</span><span>Node.js</span><span>Express</span><span>PostgreSQL</span></div>
+        <div class="proj-links"><a href="https://github.com/DxTTU" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
+      <article class="proj">
+        <div class="proj-tag">AI Tool</div>
+        <h3>Resumint</h3>
+        <p>AI-powered ATS resume checker and job-match analyzer. Real 0–100 ATS and job-match scores with matched/missing skills, keyword gaps, and improvement guides. Live in production.</p>
+        <div class="proj-stack"><span>React</span><span>Node.js</span><span>PostgreSQL</span><span>Render</span></div>
+        <div class="proj-links"><a href="https://resumint-ya5w.onrender.com" target="_blank" rel="noopener">Live Demo →</a><a href="https://github.com/DxTTU" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
+      <article class="proj">
+        <div class="proj-tag">DevOps</div>
+        <h3>cloudrun-devops</h3>
+        <p>Mid-level DevOps project on GCP: zero-dependency URL shortener API with multi-stage Docker builds, Prometheus monitoring, and a full GitHub Actions CI/CD pipeline (test → Trivy scan → Terraform deploy to Cloud Run).</p>
+        <div class="proj-stack"><span>Docker</span><span>Terraform</span><span>GCP</span><span>GitHub Actions</span></div>
+        <div class="proj-links"><a href="https://github.com/DxTTU/cloudrun-devops" target="_blank" rel="noopener">GitHub →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="resume">
+  <div class="wrap">
+    <div class="kicker">Resume</div>
+    <h2 class="h2">Education &amp; credentials</h2>
+    <div class="timeline">
+      <div class="t-item">
+        <h3>B.Tech, Computer Science — Cloud Engineering</h3>
+        <div class="t-where">KL University, Vijayawada</div>
+        <div class="t-when">2023 — 2027</div>
+        <p>Final-year project: adaptive web-server load balancing with ML-based auto-scaling (Nginx/HAProxy, Docker, Prometheus, Grafana, Python).</p>
+      </div>
+      <div class="t-item">
+        <h3>AWS Certified</h3>
+        <div class="t-where">Amazon Web Services</div>
+        <div class="t-when">Certification</div>
+        <p>Cloud fundamentals, core services, and deployment models.</p>
+      </div>
+      <div class="t-item">
+        <h3>Automation Anywhere Certified</h3>
+        <div class="t-where">Automation Anywhere</div>
+        <div class="t-when">Certification</div>
+        <p>RPA development and bot building for business process automation.</p>
+      </div>
+    </div>
+    <div class="cert-row">
+      <a class="btn btn-primary" href="resume.pdf" download>Download Resume (PDF)</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="kicker">Contact</div>
+    <h2 class="h2">Let's build something together</h2>
+    <p class="lead">Have an opportunity, a project idea, or just want to say hi? My inbox is always open.</p>
+    <div class="contact-grid">
+      <div class="form-card">
+        <form id="contact-form">
+          <div class="field">
+            <label for="cf-name">Your name</label>
+            <input id="cf-name" name="name" type="text" placeholder="Jane Doe" required>
+          </div>
+          <div class="field">
+            <label for="cf-email">Your email</label>
+            <input id="cf-email" name="email" type="email" placeholder="jane@example.com" required>
+          </div>
+          <div class="field">
+            <label for="cf-msg">Message</label>
+            <textarea id="cf-msg" name="message" placeholder="Hi Dhatrinath, I'd like to talk about..." required></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit" style="border:none;cursor:pointer;width:100%">Send Message</button>
+        </form>
+      </div>
+      <div class="social-card">
+        <h3 style="margin-bottom:6px">Find me online</h3>
+        <p style="color:var(--muted);font-size:0.95rem">I post about building in public, cloud, and placement prep.</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/dhatrinathlade/" target="_blank" rel="noopener"><span class="s-icon">in</span> LinkedIn — Dhatrinath Lade</a>
+          <a href="https://github.com/DxTTU" target="_blank" rel="noopener"><span class="s-icon">⌨</span> GitHub — @DxTTU</a>
+          <a href="https://www.instagram.com/_dattu_.07/" target="_blank" rel="noopener"><span class="s-icon">◈</span> Instagram — @_dattu_.07</a>
+          <a href="mailto:dhatrinathlade2006@gmail.com"><span class="s-icon">✉</span> dhatrinathlade2006@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">Built with care by Dhatrinath Lade · 2026</div>
+</footer>
+
+<script>
+(function () {
+  // Scroll-reveal for sections
+  var els = document.querySelectorAll('.about-card, .skill-group, .t-item, .form-card, .social-card');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('reveal'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function (el) { io.observe(el); });
+  }
+  // Contact form -> opens the visitor's mail client with a prefilled message
+  var form = document.getElementById('contact-form');
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var name = document.getElementById('cf-name').value.trim();
+    var email = document.getElementById('cf-email').value.trim();
+    var msg = document.getElementById('cf-msg').value.trim();
+    var subject = encodeURIComponent('Portfolio contact from ' + name);
+    var body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + email + ')');
+    window.location.href = 'mailto:dhatrinathlade2006@gmail.com?subject=' + subject + '&body=' + body;
+  });
+})();
+</script>
+</body>
+</html>
