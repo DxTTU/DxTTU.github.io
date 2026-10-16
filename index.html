@@ -196,8 +196,53 @@ body::after {
 .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 1.5px; color: var(--faint); }
 
 /* ---------- reveal ---------- */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; transition-delay: var(--d, 0s); }
 .reveal.in { opacity: 1; transform: none; }
+
+/* ---------- motion layer ---------- */
+.hero h1 .line { display: block; overflow: hidden; }
+.hero h1 .line > span { display: block; transform: translateY(112%); animation: riseIn 1.05s cubic-bezier(0.19, 0.7, 0.22, 1) forwards; }
+.hero h1 .line:nth-child(2) > span { animation-delay: 0.14s; }
+@keyframes riseIn { to { transform: none; } }
+.hero .hero-kicker, .hero .hero-sub, .hero .hero-cta, .hero .vf-coords { opacity: 0; animation: fadeSlide 0.9s ease forwards; }
+.hero .hero-kicker { animation-delay: 0.15s; }
+.hero .hero-sub { animation-delay: 0.45s; }
+.hero .hero-cta { animation-delay: 0.6s; }
+.hero .vf-coords { animation-delay: 0.75s; }
+@keyframes fadeSlide { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+/* cloud ticker */
+.marquee { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; white-space: nowrap; padding: 15px 0; background: var(--bg-soft); }
+.marquee-track { display: inline-block; animation: marquee 30s linear infinite; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 3px; color: var(--muted); }
+.marquee-track b { color: var(--red); font-weight: 400; margin: 0 20px; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* hover physics */
+.detail, .fact, .resume-cell { transition: transform 0.25s ease, border-color 0.25s ease; }
+.detail:hover, .fact:hover, .resume-cell:hover { transform: translateY(-4px); border-color: var(--faint); }
+.proj { transition: background 0.3s ease; }
+.proj:hover { background: rgba(255, 255, 255, 0.014); }
+.proj-links a { position: relative; }
+.socials a, .btn { will-change: transform; }
+
+/* stagger */
+.road .road-item:nth-child(2) { --d: 0.08s; }
+.road .road-item:nth-child(3) { --d: 0.16s; }
+.road .road-item:nth-child(4) { --d: 0.24s; }
+.notes-grid .note:nth-child(2) { --d: 0.12s; }
+.resume-grid .resume-cell:nth-child(2) { --d: 0.08s; }
+.resume-grid .resume-cell:nth-child(3) { --d: 0.16s; }
+.resume-grid .resume-cell:nth-child(4) { --d: 0.24s; }
+.facts .fact:nth-child(2) { --d: 0.08s; }
+.facts .fact:nth-child(3) { --d: 0.16s; }
+.facts .fact:nth-child(4) { --d: 0.24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+  .hero h1 .line > span { transform: none; }
+  .hero .hero-kicker, .hero .hero-sub, .hero .hero-cta, .hero .vf-coords { opacity: 1; }
+}
 
 /* ---------- portrait ---------- */
 .about-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 60px; margin-top: 38px; align-items: start; }
@@ -243,8 +288,8 @@ body::after {
       <span class="rec"><span class="rec-dot"></span>REC</span>
       <span class="vf-id">DHATRINATH LADE / FULL-STACK &amp; CLOUD</span>
     </div>
-    <div class="hero-kicker">Portfolio — Vol. 2027</div>
-    <h1>Full-stack apps,<br><em>and the cloud they run on.</em></h1>
+    <div class="hero-kicker">Cloud Engineering · Portfolio Vol. 2027</div>
+    <h1><span class="line"><span>Full-stack apps,</span></span><span class="line"><span><em>and the cloud they run on.</em></span></span></h1>
     <p class="hero-sub">I'm DHATRINATH LADE. I build AI-powered tools and cloud-native systems — from load-balancer simulators to resume checkers that actually ship.</p>
     <div class="hero-cta">
       <a class="btn btn-solid" href="#work">Selected work</a>
@@ -254,12 +299,16 @@ body::after {
   </div>
 </header>
 
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track"><span>CLOUD-NATIVE <b>✦</b> DOCKER <b>✦</b> KUBERNETES <b>✦</b> AWS <b>✦</b> TERRAFORM <b>✦</b> CI/CD <b>✦</b> GCP <b>✦</b> PROMETHEUS <b>✦</b> GITHUB ACTIONS <b>✦</b>&nbsp;</span><span>CLOUD-NATIVE <b>✦</b> DOCKER <b>✦</b> KUBERNETES <b>✦</b> AWS <b>✦</b> TERRAFORM <b>✦</b> CI/CD <b>✦</b> GCP <b>✦</b> PROMETHEUS <b>✦</b> GITHUB ACTIONS <b>✦</b>&nbsp;</span></div>
+</div>
+
 <section class="section" id="about">
   <div class="wrap">
     <div class="sec-num">01 — ABOUT</div>
     <h2 class="h2">Developer by craft,<br><em>builder by habit.</em></h2>
     <div class="about-grid">
-      <p class="about-prose">I'm a final-year computer science student who <em>learns by shipping</em>. From a real-time load-balancer simulator to an AI resume checker with real users, I turn ideas into working software — <strong>then make sure it survives the cloud.</strong></p>
+      <p class="about-prose">I'm a final-year computer science student who <em>learns by shipping</em>. From a real-time load-balancer simulator to an AI resume checker with real users, I turn ideas into working software — <strong>then make sure it survives the cloud.</strong> My specialization is cloud engineering — containerized, automated, observable — and I build the full stack that runs on it.</p>
       <figure class="portrait reveal">
         <span class="vf-corner vf-tl"></span><span class="vf-corner vf-tr"></span>
         <span class="vf-corner vf-bl"></span><span class="vf-corner vf-br"></span>
@@ -269,7 +318,7 @@ body::after {
     </div>
     <div class="facts">
       <div class="fact"><div class="k">Education</div><div class="v">B.Tech CSE (Cloud Engineering), KL University — 2027</div></div>
-      <div class="fact"><div class="k">Focus</div><div class="v">Full-stack · Cloud &amp; DevOps · AI tools</div></div>
+      <div class="fact"><div class="k">Specialization</div><div class="v">Cloud Engineering — containerized, automated, observable</div></div>
       <div class="fact"><div class="k">Certified</div><div class="v">AWS · Oracle Cloud AI · Automation Anywhere</div></div>
       <div class="fact"><div class="k">Languages</div><div class="v">English · Telugu · Hindi</div></div>
     </div>
@@ -475,6 +524,21 @@ body::after {
   } else {
     els.forEach(function (el) { el.classList.add('in'); });
   }
+  // gentle hero parallax on scroll
+  var vf = document.querySelector('.viewfinder');
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(function () {
+        var y = window.scrollY;
+        if (vf && y < window.innerHeight * 1.2) {
+          vf.style.transform = 'translateY(' + (y * 0.14) + 'px)';
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 })();
 </script>
 </body>
