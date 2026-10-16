@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dhatrinath Lade · Full-Stack & Cloud</title>
-<meta name="description" content="Dhatrinath Lade — B.Tech CSE (Cloud Engineering). I build full-stack apps and the cloud they run on.">
+<title>DHATRINATH LADE · Full-Stack & Cloud</title>
+<meta name="description" content="DHATRINATH LADE — B.Tech CSE (Cloud Engineering). I build full-stack apps and the cloud they run on.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,300;1,9..144,400&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -199,8 +199,15 @@ body::after {
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.in { opacity: 1; transform: none; }
 
+/* ---------- portrait ---------- */
+.about-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 60px; margin-top: 38px; align-items: start; }
+.portrait { position: relative; padding: 20px; margin: 0; }
+.portrait img { display: block; width: 100%; height: auto; filter: saturate(0.92) contrast(1.04); }
+.portrait figcaption { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 2px; color: var(--faint); margin-top: 16px; }
+
 /* ---------- responsive ---------- */
 @media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
   .proj { grid-template-columns: 1fr; gap: 28px; }
   .notes-grid, .resume-grid { grid-template-columns: 1fr; }
   .skill-row { grid-template-columns: 1fr; gap: 8px; }
@@ -238,7 +245,7 @@ body::after {
     </div>
     <div class="hero-kicker">Portfolio — Vol. 2027</div>
     <h1>Full-stack apps,<br><em>and the cloud they run on.</em></h1>
-    <p class="hero-sub">I'm Dhatrinath Lade. I build AI-powered tools and cloud-native systems — from load-balancer simulators to resume checkers that actually ship.</p>
+    <p class="hero-sub">I'm DHATRINATH LADE. I build AI-powered tools and cloud-native systems — from load-balancer simulators to resume checkers that actually ship.</p>
     <div class="hero-cta">
       <a class="btn btn-solid" href="#work">Selected work</a>
       <a class="btn btn-line" href="#contact">Get in touch</a>
@@ -251,7 +258,15 @@ body::after {
   <div class="wrap">
     <div class="sec-num">01 — ABOUT</div>
     <h2 class="h2">Developer by craft,<br><em>builder by habit.</em></h2>
-    <p class="about-prose" style="margin-top:34px">I'm a final-year computer science student who <em>learns by shipping</em>. From a real-time load-balancer simulator to an AI resume checker with real users, I turn ideas into working software — <strong>then make sure it survives the cloud.</strong></p>
+    <div class="about-grid">
+      <p class="about-prose">I'm a final-year computer science student who <em>learns by shipping</em>. From a real-time load-balancer simulator to an AI resume checker with real users, I turn ideas into working software — <strong>then make sure it survives the cloud.</strong></p>
+      <figure class="portrait reveal">
+        <span class="vf-corner vf-tl"></span><span class="vf-corner vf-tr"></span>
+        <span class="vf-corner vf-bl"></span><span class="vf-corner vf-br"></span>
+        <img src="portrait.jpg" alt="DHATRINATH LADE at the beach at sunset">
+        <figcaption>FIG. 01 — GOLDEN HOUR, OFF THE GRID</figcaption>
+      </figure>
+    </div>
     <div class="facts">
       <div class="fact"><div class="k">Education</div><div class="v">B.Tech CSE (Cloud Engineering), KL University — 2027</div></div>
       <div class="fact"><div class="k">Focus</div><div class="v">Full-stack · Cloud &amp; DevOps · AI tools</div></div>
