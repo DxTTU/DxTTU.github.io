@@ -262,6 +262,18 @@ body:not(.loaded) { overflow: hidden; }
 @keyframes partTop { to { transform: scaleY(0); } }
 @keyframes partBottom { to { transform: scaleY(0); } }
 
+/* ---------- custom cursor (desktop only) ---------- */
+.cursor-dot, .cursor-ring { display: none; }
+@media (pointer: fine) {
+  .has-cursor, .has-cursor a, .has-cursor button { cursor: none; }
+  .cursor-dot, .cursor-ring { display: block; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 2000; border-radius: 50%; }
+  .cursor-dot { width: 6px; height: 6px; background: #fff; mix-blend-mode: difference; transform: translate(-50%, -50%); }
+  .cursor-ring { width: 40px; height: 40px; border: 1px solid rgba(255, 255, 255, 0.7); mix-blend-mode: difference; transform: translate(-50%, -50%); transition: width 0.3s cubic-bezier(0.16,1,0.3,1), height 0.3s cubic-bezier(0.16,1,0.3,1), border-color 0.3s; }
+  .cursor-ring.grow { width: 72px; height: 72px; border-color: #fff; }
+  .cursor-hidden .cursor-dot, .cursor-hidden .cursor-ring { opacity: 0; }
+  .cursor-dot, .cursor-ring { transition: opacity 0.25s; }
+}
+
 /* ---------- scroll progress wire ---------- */
 .progress-wire { position: fixed; top: 0; left: 0; height: 2px; width: 100%; z-index: 300; pointer-events: none; }
 .progress-wire span { display: block; height: 100%; background: var(--silver); transform: scaleX(0); transform-origin: left; }
@@ -355,6 +367,8 @@ body.loaded .hero .vf-coords { animation-delay: 0.7s; }
   <div class="loader-count">000</div>
 </div>
 <div class="progress-wire" aria-hidden="true"><span id="progressWire"></span></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
 <nav class="nav">
   <div class="nav-inner">
@@ -682,6 +696,35 @@ body.loaded .hero .vf-coords { animation-delay: 0.7s; }
   }
   window.addEventListener('scroll', updateWire, { passive: true });
   updateWire();
+
+  // ---------- custom cursor (desktop, fine pointer only) ----------
+  if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+    document.body.classList.add('has-cursor');
+    var dot = document.getElementById('cursorDot');
+    var ring = document.getElementById('cursorRing');
+    var mx = -100, my = -100, rx = -100, ry = -100, shown = false;
+    document.addEventListener('mousemove', function (e) {
+      mx = e.clientX; my = e.clientY;
+      if (!shown) { shown = true; document.body.classList.remove('cursor-hidden'); }
+      dot.style.left = mx + 'px';
+      dot.style.top = my + 'px';
+    });
+    document.addEventListener('mouseleave', function () {
+      shown = false; document.body.classList.add('cursor-hidden');
+    });
+    (function ringLoop() {
+      rx += (mx - rx) * 0.16;
+      ry += (my - ry) * 0.16;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(ringLoop);
+    })();
+    document.querySelectorAll('a, button').forEach(function (el) {
+      el.addEventListener('mouseenter', function () { ring.classList.add('grow'); });
+      el.addEventListener('mouseleave', function () { ring.classList.remove('grow'); });
+    });
+    document.body.classList.add('cursor-hidden');
+  }
 
   // ---------- magnetic buttons ----------
   if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
